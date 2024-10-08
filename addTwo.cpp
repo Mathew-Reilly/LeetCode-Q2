@@ -8,7 +8,7 @@
 using namespace std;
 
 // FROM LEETCODE, a definition linked list nodes
-struct ListNode 
+struct ListNode
 {
   int val;
   ListNode *next;
@@ -17,14 +17,13 @@ struct ListNode
   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-
-class Solution 
+class Solution
 {
 public:
-  ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+  ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
   {
     // Check inner most conditions, if we are at the end of the list, return null.
-    if(l1->next == nullptr || l2->next == nullptr)
+    if (l1->next == nullptr || l2->next == nullptr)
     {
       return nullptr;
     }
@@ -33,51 +32,51 @@ public:
     sum.val = (sum.val + l1->val + l2->val) % 10;
     cout << "point 1\n";
 
-    if((l1->val + l2->val) > 10)
+    if ((l1->val + l2->val) > 10)
     {
-      //int remainder = 1;
+      // int remainder = 1;
       sum.next = addTwoNumbers(l1->next, l2->next);
-    } else{
+    }
+    else
+    {
       sum.next = addTwoNumbers(l1->next, l2->next);
     }
 
     cout << "point 2\n";
 
-   return &sum;
-
+    return &sum;
   }
 };
 
 class Support
 {
 public:
-  ListNode* parseListString(ListNode* head, string list)
+  ListNode *parseListString(ListNode *head, string list)
   {
-    ListNode* curNode;
+    ListNode *curNode;
     curNode = head;
-    for(int i = 0; i<list.length(); i++)
+    for (int i = 0; i < list.length(); i++)
     {
-      if(list[i] >= '0' && list[i] <= '9')
+      if (list[i] >= '0' && list[i] <= '9')
       {
         cout << list[i] << "\n";
-        if(curNode->next == nullptr)
+        if (curNode->next == nullptr)
         {
           curNode->next = new ListNode;
         }
         curNode->val = list[i] - '0';
         curNode = curNode->next;
       }
-
     }
     return head;
   }
-  void printList(ListNode* listToPrint)
+  void printList(ListNode *listToPrint)
   {
-    if(listToPrint == nullptr)
+    if (listToPrint == nullptr)
     {
       return;
     }
-    while(listToPrint != nullptr)
+    while (listToPrint != nullptr)
     {
       cout << listToPrint->val << ", ";
       listToPrint = listToPrint->next;
@@ -85,7 +84,6 @@ public:
     cout << "\n";
     return;
   }
-
 };
 
 int main()
@@ -98,24 +96,21 @@ int main()
   ListNode h1;
   ListNode h2;
 
-  ListNode* list1 = s.parseListString(&h1, l1String);
-  ListNode* list2 = s.parseListString(&h2, l2String);
+  ListNode *list1 = s.parseListString(&h1, l1String);
+  ListNode *list2 = s.parseListString(&h2, l2String);
 
   s.printList(list1);
   s.printList(list2);
 
   Solution sol;
-  ListNode* res;
+  ListNode *res;
 
   res = sol.addTwoNumbers(list1, list2);
 
-
   s.printList(res);
-  //while(res->next != nullptr)
+  // while(res->next != nullptr)
   //{
-  //  cout << res->val << ", ";
-  //}
+  //   cout << res->val << ", ";
+  // }
   return 0;
 }
-
-
