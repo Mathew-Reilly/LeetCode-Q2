@@ -32,9 +32,10 @@ public:
     // this allows the end of the list to avoid holding an empty listnode
     ListNode *sum = new ListNode(0);
     ListNode *tail = sum;
-    bool finishedIteration;
+    bool finishedIteration = false;
     int carry = 0;
 
+    int curVal;
     int val1 = 0;
     int val2 = 0;
 
@@ -45,7 +46,6 @@ public:
       (l2 != nullptr) ? val2 = l2->val : val2 = 0;
 
       // get the current sum and carry
-      int curVal;
       curVal = (val1 + val2 + carry) % 10;
       tail->next = new ListNode(curVal);
       // cout << "point 1\n";
@@ -80,11 +80,10 @@ public:
           carry = 0;
         }
         finishedIteration = true;
-        continue;
+        // continue;
       }
     }
 
-    cout << sum->next << "\n";
     return sum->next;
   }
 };
@@ -130,12 +129,12 @@ public:
 int main()
 {
   cout << "program began\n";
-  // string l1String = "[2,4,3]";
-  // string l2String = "[5,6,4]";
+  string l1String = "[2,4,3]";
+  string l2String = "[5,6,4]";
   // string l1String = "[0]";
   // string l2String = "[0]";
-  string l1String = "[9,9,9,9,9,9,9]";
-  string l2String = "[9,9,9,9]";
+  // string l1String = "[9,9,9,9,9,9,9]";
+  // string l2String = "[9,9,9,9]";
   Support s;
 
   ListNode h1;
