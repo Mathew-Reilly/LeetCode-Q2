@@ -38,9 +38,24 @@ public:
     int curVal;
     int val1 = 0;
     int val2 = 0;
+    bool l1Check;
+    bool l2Check;
+    bool didCarry = false;
 
     while (!finishedIteration)
     {
+      // If boths next value is null and we have no carry, we have finished iterating.
+      if (l1->next == nullptr && l2->next == nullptr)
+      {
+        if (carry != 0 && !didCarry)
+        {
+          tail->next = new ListNode(carry);
+          carry = 0;
+        }
+        finishedIteration = true;
+        continue;
+      }
+      didCarry = false;
 
       (l1 != nullptr) ? val1 = l1->val : val1 = 0;
       (l2 != nullptr) ? val2 = l2->val : val2 = 0;
@@ -55,6 +70,7 @@ public:
       {
         // int remainder = 1;
         carry = (val1 + val2 + carry) / 10;
+        didCarry = true;
       }
       else
       {
@@ -69,19 +85,8 @@ public:
       {
         l2 = l2->next;
       }
-      tail = tail->next;
 
-      // If boths next value is null and we have no carry, we have finished iterating.
-      if (l1->next == nullptr && l2->next == nullptr)
-      {
-        if (carry != 0)
-        {
-          tail->next = new ListNode(carry);
-          carry = 0;
-        }
-        finishedIteration = true;
-        // continue;
-      }
+      tail = tail->next;
     }
 
     return sum->next;
