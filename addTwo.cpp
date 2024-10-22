@@ -40,11 +40,11 @@ public:
     int val2 = 0;
     bool l1Check;
     bool l2Check;
-    bool didCarry = false;
+    // bool didCarry = false;
 
     while (!finishedIteration)
     {
-      didCarry = false;
+      // didCarry = false;
 
       (l1 != nullptr) ? val1 = l1->val : val1 = 0;
       (l2 != nullptr) ? val2 = l2->val : val2 = 0;
@@ -59,27 +59,30 @@ public:
       {
         // int remainder = 1;
         carry = (val1 + val2 + carry) / 10;
-        didCarry = true;
+        // didCarry = true;
       }
       else
       {
         carry = 0;
       }
 
-      if (l1->next != nullptr)
+      l1Check = (l1->next != nullptr);
+      l2Check = (l2->next != nullptr);
+
+      if (l1Check)
       {
         l1 = l1->next;
       }
-      if (l2->next != nullptr)
+      if (l2Check)
       {
         l2 = l2->next;
       }
       tail = tail->next;
 
       // If boths next value is null and we have no carry, we have finished iterating.
-      if (l1->next == nullptr && l2->next == nullptr)
+      if (!l1Check && !l2Check)
       {
-        if (carry != 0 && !didCarry)
+        if (carry != 0)
         {
           tail->next = new ListNode(carry);
           carry = 0;
@@ -134,12 +137,12 @@ public:
 int main()
 {
   cout << "program began\n";
-  string l1String = "[2,4,3]";
-  string l2String = "[5,6,4]";
+  // string l1String = "[2,4,3]";
+  // string l2String = "[5,6,4]";
   // string l1String = "[0]";
   // string l2String = "[0]";
-  // string l1String = "[9,9,9,9,9,9,9]";
-  // string l2String = "[9,9,9,9]";
+  string l1String = "[9,9,9,9,9,9,9]";
+  string l2String = "[9,9,9,9]";
   Support s;
 
   ListNode h1;
